@@ -1,0 +1,443 @@
+badri-name
+---------------
+AWS-Linux
+---------------
+sudo su -root
+exit
+sudo su ec2-user
+------------------------
+CRUD-Create Read Update Delete
+touch-create file
+touch file-name --> creates the file
+cat > file-name --> adding the text
+cat >> file-name --> append/add the text
+enter the text
+ctrl+D
+cat file-name --> reading the text
+cd .. --> one step back
+rm file-name --> remove file
+mkdir-create directory
+mkdir folder-name --> creates the folder
+d --> directory
+- --> file
+rmdir folder-name --> remove directory
+rm -r folder-name/ --> delete folder and content inside folder
+mv <old-file-name> <new-file-name> --> rename file
+mv AWSS.txt AWS.txt
+mv <old-folder-name> <new-folder-name> --> rename folder
+mv Devopss Devops
+uname-Kelnal information
+uname -a --> get more information about kelnal
+cp <source-file> <destination-file>
+grep <word-to-find> <file>  --> to search a word in file
+grep -i <word-to-find> <file>   --> case insensitive
+How to download a file
+wget <URL> --> wget is used to download the file
+curl <URL> --> curl is used to show the text directly on the terminal
+echo Badri/sake | cut -d "/" -f1
+Badri
+echo Hello > hello.txt
+Hello
+awk command
+awk -F "/" '{print $1F}'
+echo Badri/sake | awk -F "/" '{print $1F}'
+How to get list of users in Linux server?
+
+Editor
+---------------
+vim --> visually improved
+vim <file-name>
+:q --> Quit
+:wq! --> write and quit
+:q! -->  don't save the changes and exit
+:set nu
+:set nonu
+:/<word-to-find> -->search from top
+:?<word-to-find> -->search from bottom
+:noh --> don't highlight
+:%d --> delete everything
+:1d --> delete first line
+:s/which-word/what-you-want --> replaces your word where your cursor is and only first occurrence
+:s/which-word/what-you-want/g --> all occurrences in that line
+:3s:s/which-word/what-you-want/g --> all occurrences in 3rd line
+:%s/:s/which-word/what-you-want/g  --> all occurrences in file
+u --> undo
+shift+g --> goes to bottom
+gg --> goes to top
+yy --> copy
+p --> paste
+10 --> 10 times paste
+dd --> delete any line
+
+
+permissions
+-------------------
+Read  Write Execute
+
+-rw-r--r--
+- --> denotes it is file
+rw- --> who is the owner of the file == U
+r-- --> which group he belongs to == g 
+r-- --> Others == o
+
+R --> 4
+W --> 2
+X --> 1
+
+777 --> all access to everyone
+750 --> all access to owner, RX for group, 0 for others
+Who can change the permission? ->Either owner or admin  can change permissions
+chmod o+w session.txt
+chmod o+x session.txt
+chmod o-rwx session.txt
+chmod ugo+rwx session.txt
+
+User Management
+----------------------
+sudo su --> super user
+
+create user 
+Useradd <user-name>
+id --> gives all info about current user
+useradd badri
+id badri --> displays badri information
+when you create user, by default a group will be created on the same username
+/etc/passwd --> users info
+/etc/group --> group info
+passwd <user-name>
+passwd badri --> setup the password for badri
+create devops group add Ramesh to devops group
+groupadd devops
+every user has atleast one primary group and multiple secondary groups
+usermod -g devops badri --> adding badri to devops group
+badri primary --> devops
+badri secondary --> testing
+usermod -aG testing badri --> adding badri  to testing group as secondary group
+gpasswd -d badri testing --> delete  badri from testing group
+
+if employee leaves the organisation
+------------------------------------------
+1. remove him from the group
+2. then delete the user
+
+A user must have atleast one primary and one secondary group
+usermod -g badri badri
+userdel badri --> badri user and badri group both will be deleted
+cat /etc/group
+
+manju manju
+--------------
+inform manju, that his user is created 
+
+54.91.83.68 --> he should login with username and password
+
+By default, Linux OS will not allow password authentication, it will only allow key based auth
+vim /etc/ssh/sshd_config
+
+systemctl restart sshd
+/home/manju
+.ssh --> authourized_keys --> public key
+Linux admins will ask for manju public key .. manju generates key pair and send public key to Linux admin
+400 --> read access only to user, even manju should not have write access
+chmod 400 authorized_keys
+
+Ownership
+---------------------
+chown --> change ownership
+
+directory --> 700
+authorized_keys --> 400
+
+Package management
+------------------------------------
+A Software have lot of dependencies on other software's.
+rpm --> redhat package manager
+identify the dependencies, install the dependencies and finally install the package you want
+yum --> dnf
+cat /etc/yum.repos.d/
+dnf list installed
+dnf list installed | wc -l
+dnf list available
+dnf list available | wc -l
+dnf remove git -y
+
+How can you check cpuinfo, memory info, OS
+cat /proc/cpuinfo
+cat /proc/meminfo
+cat /etc/os-release
+
+Service Management
+--------------------------------------
+service start, service stop, service restart, status check, enable, disable
+systemctl status sshd
+
+HTTP -->80
+
+Nginx --> install this package
+start the service
+dnf install nginx -y
+systemctl start nginx
+systemctl status nginx
+systemctl stop nginx
+systemctl restart nginx
+systemctl disable nginx
+http://52.55.2.184:80--->SG -->port no 80 allowed-->forward request to Linux server
+enable--> by default enabled services will start automatically
+
+Process Management
+--------------------------------
+A sequence of steps to be executed to complete a task.
+Every process should have an id for tracking purpose.
+ps 
+ps -ef
+ps -ef | grep nginx
+
+foreground --> Blocks the screen, runs in foreground and (sleep 10) 
+background process --> runs in background, you can do other works(sleep 100 &)
+
+top --> command
+kill --> request
+kill -9 pid ---> order
+
+Networking Management
+--------------------------------
+port check
+netstat --> network statistics
+netstat
+netstat -l
+netstat -lt
+netstat -ltp 
+netstat -ltpn or -lntp --> it will tell you what ports are open
+
+Project
+-------------------------
+Desktop applications
+
+Disadvantages
+---------------------
+we have to install
+we have to maintain storage--> only in single system
+we have to upgrade
+fixing the problems
+what if system crash?
+system resources.
+
+web based applications
+------------------------------
+no installation
+no upgrade
+no compatibility issues
+no storage issues
+you can open every where
+
+web based applications --> 3 tier architecture
+web tire --> LB, WEB SERVERS
+app/api tire --> app servers
+data tier -> DB servers
+
+Databases --> MYSQL, MSSQL, Oracle, postgress, MongoDB, Redis
+APP/API(Backend tire)(dynamic)----> Java, Python, NodeJS, DotNet, Go, etc.-----> JBoss, webspher, weblogic, etc. --> Tomcat
+web (frontend) (static)---> HTML, CSS, JavaScript, ReactJS, Angular, ExpressJS, Jquery, etc.--->Nginx, Apache, etc.
+
+DevOps-Practice-->Community AMIs (2)-->RHEL-9-DevOps-Practice
+we will use only username and password to login servers
+
+ec2-user
+DevOps321--> D and O is caps
+
+Database server
+--------------------------
+install DB-->MySQL
+
+dnf install
+run DB--> systemctl
+
+check the status --> systemctl status
+check port opened or not --> netstat -lntp
+check the process --> ps -ef | grep <name>
+
+username is root
+password 
+
+server software is mysql-server and it is running, to check data you should connect to server through client
+
+client package is just MySQL
+mysql -h <IP> -u root -p<password>
+
+Backend --> Java, DotNet, Python, NodeJs, go, ruby, php etc.
+
+NodeJs
+---------------
+dependencies --> nginx, git, etc.
+libraries
+source files--> *.js
+
+build file==package.json --> where you mention your project metadata. Name, description, version, dependencies, and their versions.
+build tool =npm --> it will search package.json in your folder and it will get the dependencies/libraries from internet.
+useradd expencse
+mkdir /app
+curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+npm install
+
+build file=package..json
+build tool=npm-->node package manager
+files --> *.js
+npm install
+node_modules
+
+dnf install nginx -y
+systemctl start nginx
+
+ /etc/systemd/system/backend.service-->Here you can place all your service fiels
+ extension-->.service
+public IP may change when restart the server, but private IP will never change if you stop and start the server
+/var/log/messages --> Linux logs everything here
+
+Create a schema/database for expense project
+create table
+
+CREATE DATABASE IF NOT EXISTS transactions;
+USE transactions;
+
+CREATE TABLE IF NOT EXISTS transactions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    amount INT,
+    description VARCHAR(255)
+);
+
+CREATE USER IF NOT EXISTS 'expense'@'%' IDENTIFIED BY 'ExpenseApp@1';
+GRANT ALL ON transactions.* TO 'expense'@'%';
+FLUSH PRIVILEGES;
+
+backend applications mostly opens ---> 8080
+ping <IP>
+telnet <IP> 3306
+/etc/nginx --> nginx configuration is here
+/usr/share/nginx/html --> here you need to place your websites
+/var/log/nginx --> here nginx places the logs
+/usr/share/nginx/html/index.html --> load automatically when you hit IP
+
+
+Java
+--------------
+build file==pom.xml --> name, project description, dependencies and their versions.
+build tool=maven--> it will search package.json in your folder and it will get the dependencies/libraries from internet.
+source files--> *.java
+
+Python
+--------------
+build file==requirements.txt --> name, project description, dependencies and their versions.
+build tool=pip--> it will search package.json in your folder and it will get the dependencies/libraries from internet.
+source files--> *.py
+useradd expencse
+mkdir /app
+curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+npm install
+
+
+[Unit]
+Description = Backend Service
+
+[Service]
+User=expense
+Environment=DB_HOST="<MYSQL-SERVER-IPADDRESS>"
+ExecStart=/bin/node /app/index.js
+SyslogIdentifier=backend
+
+[Install]
+WantedBy=multi-user.target
+
+without touching the servers, tasks should automatically update
+
+DNS--> Domain name system
+-----------------
+mysql.devops.com--> return IP address
+
+domain registars --> godaddy, hostinger, AWS, Azure, GCP, etc.
+hostinger--> cheapest way to buy domains
+domain name is unique in the universe
+facebook.com -->18.90.23.12
+consider yours is new laptop, opened browser for first time
+browser checks its cache for IP of facebook.com
+browser contacts OS, for IP address of facebook.com
+OS checks its cache now, it is NA..
+ISP is responsible for the DNS resolution
+OS is enabled to contact ISP DNS resolver
+DNS resolver checks its cache..
+Root servers---> 13 servers
+top MNC companies and country governments create a non profit organisation to manage these root servers
+DNS resolver contacts nearest root servers..
+root servers scans the domain you asked for facebook.com
+TLD --> top level domains
+.com, .online, .ord, .edu, .in, .uk, .us, .net, .io, .ai, .shop
+root server informs DNS resolver to contact .com TLD, root server provides .com TLD address details.
+DNS resolver contacts .com TLD to provide IP address
+TLD checks its systems to provide IP address of facebook.com
+
+Records
+------------------
+A record --> you have to update IP address to your domain
+
+.siva --> I should contact root server that i started a TLD called .siva
+
+Domain registers are middle man. now i connect all major domain registars to show my domain TLD
+Domain registars inform TLD that some one bought facebook.siva domain
+Domain registars update nameservers for the domain from TLD...
+
+Forward Proxy & Revers Proxy
+---------------------------------
+1. you can watch restricted content
+2. you can change geo location 
+3. client side proxy, only client is aware of proxy
+4. hiding client identity
+5. traffic monitor
+6. secure connections
+7. content access restriction
+
+& Revers Proxy
+-------------------------------
+1. only server is aware of proxy
+2. security between clients and servers
+3. as load balancer
+4. ssl 
+
+Linux folder structure
+-----------------------
+/ --> root directory of the OS
+/bin(binaries) -> essential commands are here. ls, cat, grep, etc.
+/sbin(system binaries) -->  admin commands, reboot, iptables, etc.
+/boot --> when Linux servers started, it refers boot directory for system configuration
+/dev(devices) --> monitor/terminal, keyboard, printer, etc.
+/etc(extra configuration) --> system configuration files, service configuratons
+/home(home directory of users) --> all user directory are here, their personal files, user related configs.
+/lib(libraries) --> libraries/dependencies requires by OS equal to .dll in windows
+/lib64(64bit libs)
+/media(media devices) --> CD, DVD, USB etc.
+/mnt(mount) --> adding extra disks
+/opt(optional) --> if you want third party applications, custom applications you can keep here
+/proc(processor) --> /proc/cpuinfo/proc/meminfo
+/root(root user) --> home directory of root user
+/run(running information of server) 
+/srv(service files) --> when you use your server to serve as file server, you can use this
+/swap(swap space) --> 1GB ram, OS will use this swap space for extension of RAM. reserver space
+/sys --> system kernel info, devices info, etc
+/tmp --> temporary directory, not at all important 
+/usr --> shared files and docs between all users.
+/var(variables) --> logs and messages
+
+
+/etc
+/opt
+/var
+/bin
+
+free -m --> check ram usage
+df -hT --> HD usage
+
+Shell Scripting
+-------------------
+Keep all your commands in a file and run that file --> shell script
+what is shell?
+shell is a interpreter in Linux, that checks and executes the users commands
+/bin/bash --> interpreters every command issued Linux server
+

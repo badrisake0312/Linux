@@ -1,0 +1,28 @@
+SAR(System Activity Report) and MAN Commands
+The sar command is used to collect, report, and save system performance metrics over time. It's part of the sysstat package, which may need to be installed.
+sudo apt-get install -y sysstat
+sudo systemctl enable sysstat
+sudo systemctl start sysstat
+Check CPU usage:
+sar -u 5 10  # Displays CPU usage every 5 sec, 10 times
+Check memory usage:
+sar -b 5 10  # Displays memory usage every 5 sec, 10 times
+Check I/O activity:
+sar -b 5 10
+Check network statistics:
+sar -n DEV 1 5
+Load average:
+sar -q 1 5
+
+MAN(Manual Pages)
+The man command is used to display documentation for other Linux commands.
+Get help for a command:
+man ls
+Search for a keyword in all man pages:
+man -k memory
+Display only a short description:
+whatis sar
+
+
+
+

@@ -6,7 +6,7 @@ sudo systemctl start sysstat
 Check CPU usage:
 sar -u 5 10  # Displays CPU usage every 5 sec, 10 times
 Check memory usage:
-sar -b 5 10  # Displays memory usage every 5 sec, 10 times
+sar -r 5 10  # Displays memory usage every 5 sec, 10 times
 Check I/O activity:
 sar -b 5 10
 Check network statistics:

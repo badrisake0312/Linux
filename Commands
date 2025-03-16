@@ -106,9 +106,12 @@ Read  Write Execute
 
 -rw-r--r--
 - --> denotes it is file
-rw- --> who is the owner of the file == U
-r-- --> which group he belongs to == g 
-r-- --> Others == o
+rw- --> who is the owner of the file == User
+r-- --> which group he belongs to == group
+r-- --> Others == others
+
+Who can change the permission of file? -> Either owner or admin can change permissions
+when you don't assign a user to any group, his group is also same as his username.
 
 R --> 4
 W --> 2
@@ -125,10 +128,8 @@ chmod ugo+rwx session.txt
 User Management
 ----------------------
 sudo su --> super user
-
-create user 
-Useradd <user-name>
-id --> gives all info about current user
+Useradd <user-name> -> Create User
+id --> shows which user currently login & gives all info about current user
 useradd badri
 id badri --> displays badri information
 when you create user, by default a group will be created on the same username
@@ -143,7 +144,12 @@ usermod -g devops badri --> adding badri to devops group
 badri primary --> devops
 badri secondary --> testing
 usermod -aG testing badri --> adding badri  to testing group as secondary group
-gpasswd -d badri testing --> delete  badri from testing group
+gpasswd -d badri testing --> remove  badri from testing group
+userdel badri --> delete user in server
+groupdel badri --> delete group in server
+
+
+
 
 if employee leaves the organisation
 ------------------------------------------

@@ -40,6 +40,8 @@ mv Devopss Devops
 ----------------------------------------------------------
 uname -> shows the Kelnal information like ex: Linux
 uname -a -> get more information about kelnal
+cat /etc/os-release -> to check flavour of the linux
+
 ----------------------------------------------------------
 cp <source-file> <destination-file> -> copy file
 

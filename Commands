@@ -180,6 +180,8 @@ chmod 400 authorized_keys
 Ownership
 ---------------------
 chown --> change ownership
+chown -R badri:badri .ssh
+chown 600 .ssh/
 
 directory --> 700
 authorized_keys --> 400

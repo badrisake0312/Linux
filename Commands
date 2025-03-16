@@ -1,16 +1,26 @@
 badri-name
 ---------------
-AWS-Linux
+AWS-Linux-Is Case Sensetive
 ---------------
 sudo su -root
 exit
 sudo su ec2-user
 ------------------------
-CRUD-Create Read Update Delete
-touch-create file
-touch file-name --> creates the file
-cat > file-name --> adding the text
-cat >> file-name --> append/add the text
+pwd -> present working directory
+ssh -> keygen -f linux-key
+ls -> to list the files
+ls -l -> l for lengthy format
+ls -lr -> reverse order
+ls -lt -> time
+ls -ltr -> time in reverse
+ls -la -> all file including hidden files
+ls --help -> documentation of ls commamds
+-------------------------------------------------
+CRUD--->Create Read Update Delete
+touch -> Create file
+touch <file-name> --> creates the file
+cat > <file-name> --> adding the text and ctrl+d to role back to terminal
+cat >> <file-name> --> append/add the text
 enter the text
 ctrl+D
 cat file-name --> reading the text
@@ -20,18 +30,24 @@ mkdir-create directory
 mkdir folder-name --> creates the folder
 d --> directory
 - --> file
-rmdir folder-name --> remove directory
-rm -r folder-name/ --> delete folder and content inside folder
+rmdir folder-name --> remove only empty directory
+rm -r folder-name/ --> delete folder and files inside folder
+--------------------------------------------------------------
 mv <old-file-name> <new-file-name> --> rename file
 mv AWSS.txt AWS.txt
 mv <old-folder-name> <new-folder-name> --> rename folder
 mv Devopss Devops
-uname-Kelnal information
-uname -a --> get more information about kelnal
-cp <source-file> <destination-file>
+----------------------------------------------------------
+uname -> shows the Kelnal information like ex: Linux
+uname -a -> get more information about kelnal
+----------------------------------------------------------
+cp <source-file> <destination-file> -> copy file
+
 grep <word-to-find> <file>  --> to search a word in file
 grep -i <word-to-find> <file>   --> case insensitive
+-------------------------------------------------------
 How to download a file
+-------------------------------------------------------
 wget <URL> --> wget is used to download the file
 curl <URL> --> curl is used to show the text directly on the terminal
 echo Badri/sake | cut -d "/" -f1
@@ -41,7 +57,19 @@ Hello
 awk command
 awk -F "/" '{print $1F}'
 echo Badri/sake | awk -F "/" '{print $1F}'
+-------------------------------------------------
 How to get list of users in Linux server?
+cat /etc/passwd
+awk -F ":" '{print $1F}' passwd
+-------------------------------------------------
+Head & Tail
+Head <filename> -> display first 10 lines
+Tail <filename> -> display last 10 lines
+head -n 2 passwd -> custume lines
+cat passwd | head -n 7 | tail -n 5 
+-------------------------------------------------
+How to see running logs
+cat /var/log/
 
 Editor
 ---------------

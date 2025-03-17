@@ -235,7 +235,7 @@ background process --> runs in background, you can do other works(sleep 100 &)
 
 top --> command
 kill --> request
-kill -9 pid ---> order
+kill -9 processID ---> order
 
 Networking Management
 --------------------------------
